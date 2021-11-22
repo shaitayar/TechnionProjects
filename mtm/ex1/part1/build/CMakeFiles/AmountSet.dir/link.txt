@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\AmountSet.dir/objects.a
+C:\TDM-GCC-64\bin\ar.exe cr CMakeFiles\AmountSet.dir/objects.a @CMakeFiles\AmountSet.dir\objects1.rsp
+C:\TDM-GCC-64\bin\x86_64-w64-mingw32-gcc.exe -g   -Wl,--whole-archive CMakeFiles\AmountSet.dir/objects.a -Wl,--no-whole-archive  -o AmountSet.exe -Wl,--out-implib,libAmountSet.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\AmountSet.dir\linklibs.rsp

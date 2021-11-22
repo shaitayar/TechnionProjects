@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/mtm/Winter2122/hw1/part1/amount_set_str.c
+stdlib.h
+-
+string.h
+-
+stdbool.h
+-
+amount_set_str.h
+C:/mtm/Winter2122/hw1/part1/amount_set_str.h
+
+C:/mtm/Winter2122/hw1/part1/amount_set_str.h
+stdio.h
+-
+stdbool.h
+-
+
