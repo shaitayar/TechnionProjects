@@ -4,8 +4,8 @@
 
 
 # Configuration directories and files
-SourceDirectory: C:/mtm/Winter2122/hw1/part1
-BuildDirectory: C:/mtm/Winter2122/hw1/part1/build
+SourceDirectory: C:/TechnionProjects/TechnionProjects/mtm/ex1/part1
+BuildDirectory: C:/TechnionProjects/TechnionProjects/mtm/ex1/part1/build
 
 # Where to place the cost data store
 CostDataFile: 
@@ -26,7 +26,7 @@ SubmitURL: http://
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/mtm/Winter2122/hw1/part1"
+ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/TechnionProjects/TechnionProjects/mtm/ex1/part1"
 MakeCommand: C:/Program\ Files/CMake/bin/cmake.exe --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 

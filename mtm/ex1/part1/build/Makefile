@@ -67,10 +67,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\mtm\Winter2122\hw1\part1
+CMAKE_SOURCE_DIR = C:\TechnionProjects\TechnionProjects\mtm\ex1\part1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\mtm\Winter2122\hw1\part1\build
+CMAKE_BINARY_DIR = C:\TechnionProjects\TechnionProjects\mtm\ex1\part1\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -78,7 +78,7 @@ CMAKE_BINARY_DIR = C:\mtm\Winter2122\hw1\part1\build
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	"C:\Program Files\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/mtm/Winter2122/hw1/part1/build/CPackSourceConfig.cmake
+	"C:\Program Files\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/TechnionProjects/TechnionProjects/mtm/ex1/part1/build/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -132,9 +132,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\mtm\Winter2122\hw1\part1\build\CMakeFiles C:\mtm\Winter2122\hw1\part1\build\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\TechnionProjects\TechnionProjects\mtm\ex1\part1\build\CMakeFiles C:\TechnionProjects\TechnionProjects\mtm\ex1\part1\build\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\mtm\Winter2122\hw1\part1\build\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\TechnionProjects\TechnionProjects\mtm\ex1\part1\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target

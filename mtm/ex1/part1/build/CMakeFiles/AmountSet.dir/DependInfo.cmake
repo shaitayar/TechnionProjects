@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/mtm/Winter2122/hw1/part1/Test.c" "C:/mtm/Winter2122/hw1/part1/build/CMakeFiles/AmountSet.dir/Test.c.obj"
-  "C:/mtm/Winter2122/hw1/part1/amount_set_str.c" "C:/mtm/Winter2122/hw1/part1/build/CMakeFiles/AmountSet.dir/amount_set_str.c.obj"
+  "C:/TechnionProjects/TechnionProjects/mtm/ex1/part1/Test.c" "C:/TechnionProjects/TechnionProjects/mtm/ex1/part1/build/CMakeFiles/AmountSet.dir/Test.c.obj"
+  "C:/TechnionProjects/TechnionProjects/mtm/ex1/part1/amount_set_str.c" "C:/TechnionProjects/TechnionProjects/mtm/ex1/part1/build/CMakeFiles/AmountSet.dir/amount_set_str.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

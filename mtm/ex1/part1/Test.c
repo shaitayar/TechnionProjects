@@ -21,10 +21,6 @@ int main() {
         printf("Test 1 Failed at check_point 4\n");
         check=false;
     }
-    if(strcmp(asGetNext(Set1),"yones")!=0){
-        printf("Test 1 Failed at check_point 5\n");
-        check=false;
-    }
 
     if(asRegister(Set1, "omran") != AS_SUCCESS){
         printf("Test 1 Failed at check_point 6\n");
@@ -65,8 +61,7 @@ int main() {
     }
 
 
-    AmountSet CopySet=asCreate();
-    CopySet= asCopy(Set1);
+    AmountSet CopySet= asCopy(Set1);
     if(CopySet==NULL)
     {
         asDestroy(Set1);

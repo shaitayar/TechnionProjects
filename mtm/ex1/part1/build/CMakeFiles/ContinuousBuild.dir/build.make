@@ -62,10 +62,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\mtm\Winter2122\hw1\part1
+CMAKE_SOURCE_DIR = C:\TechnionProjects\TechnionProjects\mtm\ex1\part1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\mtm\Winter2122\hw1\part1\build
+CMAKE_BINARY_DIR = C:\TechnionProjects\TechnionProjects\mtm\ex1\part1\build
 
 # Utility rule file for ContinuousBuild.
 
@@ -90,6 +90,6 @@ CMakeFiles/ContinuousBuild.dir/clean:
 .PHONY : CMakeFiles/ContinuousBuild.dir/clean
 
 CMakeFiles/ContinuousBuild.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\mtm\Winter2122\hw1\part1 C:\mtm\Winter2122\hw1\part1 C:\mtm\Winter2122\hw1\part1\build C:\mtm\Winter2122\hw1\part1\build C:\mtm\Winter2122\hw1\part1\build\CMakeFiles\ContinuousBuild.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\TechnionProjects\TechnionProjects\mtm\ex1\part1 C:\TechnionProjects\TechnionProjects\mtm\ex1\part1 C:\TechnionProjects\TechnionProjects\mtm\ex1\part1\build C:\TechnionProjects\TechnionProjects\mtm\ex1\part1\build C:\TechnionProjects\TechnionProjects\mtm\ex1\part1\build\CMakeFiles\ContinuousBuild.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ContinuousBuild.dir/depend
 
