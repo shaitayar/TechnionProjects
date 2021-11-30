@@ -18,7 +18,7 @@ Matamikya matamikyaCreate()
         return NULL;
     }
 
-    new_storage->products=setCreate(productCopy, productFree, productCompare);
+    new_storage->products=setCreate(productCopy, productFree, productCompareByName);
 
     
 }

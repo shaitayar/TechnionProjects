@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\MatamkiyaProject.dir/objects.a
+C:\TDM-GCC-64\bin\ar.exe cr CMakeFiles\MatamkiyaProject.dir/objects.a @CMakeFiles\MatamkiyaProject.dir\objects1.rsp
+C:\TDM-GCC-64\bin\x86_64-w64-mingw32-gcc.exe -g   -Wl,--whole-archive CMakeFiles\MatamkiyaProject.dir/objects.a -Wl,--no-whole-archive  -o MatamkiyaProject.exe -Wl,--out-implib,libMatamkiyaProject.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\MatamkiyaProject.dir\linklibs.rsp

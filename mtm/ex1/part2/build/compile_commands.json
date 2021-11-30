@@ -1,0 +1,17 @@
+[
+{
+  "directory": "C:/TechnionProjects/TechnionProjects/mtm/ex1/part2/build",
+  "command": "C:\\TDM-GCC-64\\bin\\x86_64-w64-mingw32-gcc.exe   -g   -std=gnu99 -o CMakeFiles\\MatamkiyaProject.dir\\main.c.obj   -c C:\\TechnionProjects\\TechnionProjects\\mtm\\ex1\\part2\\main.c",
+  "file": "C:/TechnionProjects/TechnionProjects/mtm/ex1/part2/main.c"
+},
+{
+  "directory": "C:/TechnionProjects/TechnionProjects/mtm/ex1/part2/build",
+  "command": "C:\\TDM-GCC-64\\bin\\x86_64-w64-mingw32-gcc.exe   -g   -std=gnu99 -o CMakeFiles\\MatamkiyaProject.dir\\matamikya_print.c.obj   -c C:\\TechnionProjects\\TechnionProjects\\mtm\\ex1\\part2\\matamikya_print.c",
+  "file": "C:/TechnionProjects/TechnionProjects/mtm/ex1/part2/matamikya_print.c"
+},
+{
+  "directory": "C:/TechnionProjects/TechnionProjects/mtm/ex1/part2/build",
+  "command": "C:\\TDM-GCC-64\\bin\\x86_64-w64-mingw32-gcc.exe   -g   -std=gnu99 -o CMakeFiles\\MatamkiyaProject.dir\\matamikya.c.obj   -c C:\\TechnionProjects\\TechnionProjects\\mtm\\ex1\\part2\\matamikya.c",
+  "file": "C:/TechnionProjects/TechnionProjects/mtm/ex1/part2/matamikya.c"
+}
+]

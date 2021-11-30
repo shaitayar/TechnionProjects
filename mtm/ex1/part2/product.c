@@ -7,13 +7,13 @@ struct Product_t {
     unsigned int id;
     ProductData data;
     ProductAmountType amount_type;
-    unsigned int amount;
+    double amount;
     unsigned int price;
     unsigned int total_incomes;  
 };
 
 Product productCreate(char* name, unsigned int id, ProductData data, ProductAmountType amount_type,
-                        unsigned int amount, unsigned int price, unsigned int total_incomes)
+                        double amount, unsigned int price, unsigned int total_incomes)
 {
     if(!name || !data)
     {
@@ -101,7 +101,7 @@ void productFree(Product product)
     free(product);
 }
 
-int productCompare(Product product1, Product product2)
+int productCompareByName(Product product1, Product product2)
 {
     if(!product1 || !product2)
     {
@@ -109,4 +109,35 @@ int productCompare(Product product1, Product product2)
     }
     
     return strcmp(product1->name,product2->name);
+}
+
+int productCompareByID(Product product1, Product product2)
+{
+    if(!product1 || !product2)
+    {
+        return -1;
+    }
+    
+    return (product1->id)-(product2->id);
+}
+
+unsigned int getProductID(Product product)
+{
+    return product->id;
+}
+
+ProductResult addProductAmount(Product product, const double amount)
+{
+    if(!product)
+    {
+        return PRODUCT_NULL_ARGUMENT;
+    }
+
+    if(product->amount+amount < 0)
+    {
+        return PRODUCT_INVALID_AMOUNT;
+    }
+
+    product->amount+=amount;
+    return PRODUCT_SUCCESS;
 }
