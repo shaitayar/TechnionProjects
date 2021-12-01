@@ -1,4 +1,8 @@
+#ifndef MATAMIKYA_ORDER_H
+#define MATAMIKYA_ORDER_H
 
+
+#include "product.h"
 
 typedef enum OrderResult_t {
     ORDER_SUCCESS = 0,
@@ -23,3 +27,12 @@ void freeOrder(Order to_delete);
 int compareOrders(Order first, Order second);
 
 OrderResult changeProductAmountInOrder(Order order, const unsigned int productId, const double amount);
+
+unsigned int getOrderID(Order order);
+
+Product getFirstProductInOrder(Order order);
+
+Product getNextProductInOrder(Order order);
+
+
+#endif //MATAMIKYA_ORDER_H
