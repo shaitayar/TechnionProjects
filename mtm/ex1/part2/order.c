@@ -1,13 +1,15 @@
 #include "order.h"
 #include "product.h"
 #include "set.h"
+#include "amount_set.h"
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 struct order_t {
     unsigned int id;
     bool shipped;
-    Set products;
+    AmountSet products;
 };
 
 Order createOrder(unsigned int id) {
@@ -19,7 +21,7 @@ Order createOrder(unsigned int id) {
     new_order->id = id;
     new_order->shipped = false;
 
-    new_order->products = setCreate(productCopy, productFree, productCompareByID);
+    new_order->products = asCreate(productCopy, productFree, productCompareByID);
     if (!new_order->products) {
         free(new_order);
         return NULL;
@@ -27,7 +29,7 @@ Order createOrder(unsigned int id) {
     return new_order;
 }
 
-Order copyOrder(Order source) {
+ASElement copyOrder(ASElement source) {
     if (!source) {
         return NULL;
     }
@@ -37,10 +39,10 @@ Order copyOrder(Order source) {
         return NULL;
     }
 
-    copy->id = source->id;
-    copy->shipped = source->shipped;
+    copy->id = ((Order)source)->id;
+    copy->shipped = ((Order)source)->shipped;
 
-    copy->products = setCopy(source->products);
+    copy->products = asCopy(((Order)source)->products);
     if (!copy->products) {
         free(copy);
         return NULL;
@@ -48,16 +50,16 @@ Order copyOrder(Order source) {
     return copy;
 }
 
-void freeOrder(Order to_delete) {
-    setDestroy(to_delete->products);
-    free(to_delete);
+void freeOrder(ASElement to_delete) {
+    asDestroy(((Order)to_delete)->products);
+    free((Order)to_delete);
 }
 
-int compareOrders(Order first, Order second) {
-    if (!first || !second) {
+int compareOrders(ASElement first, ASElement second) {
+    if (!((Order)first) || !((Order)second)) {
         return 0;
     }
-    return (first->id) - (second->id);
+    return (((Order)first)->id) - (((Order)second)->id);
 }
 
 OrderResult changeProductAmountInOrder(Order order, const unsigned int productId, const double amount) {
@@ -65,7 +67,7 @@ OrderResult changeProductAmountInOrder(Order order, const unsigned int productId
         return ORDER_NULL_ARGUMENT;
     }
 
-    for (Product iterator = setGetFirst(order->products); iterator; iterator = setGetNext(order->products)) {
+    for (Product iterator = asGetFirst(order->products); iterator; iterator = asGetNext(order->products)) {
         if (getProductID(iterator) == productId) {
             ProductResult result = addProductAmount(iterator, amount);
 
@@ -91,7 +93,7 @@ Product getFirstProductInOrder(Order order) {
         return NULL;
     }
 
-    return setGetFirst(order->products);
+    return asGetFirst(order->products);
 }
 
 Product getNextProductInOrder(Order order) {
@@ -100,5 +102,25 @@ Product getNextProductInOrder(Order order) {
         return NULL;
     }
 
-    return setGetNext(order->products);
+    return asGetNext(order->products);
+}
+
+double calcPrice(Order order) {
+    if(!order) {
+        return 0;
+    }
+
+    double price=0;
+    Product iter=asGetFirst(order->products);
+    while(iter) 
+    {
+        productGetPrice(productGetData(iter),productGetAmount(iter));
+        iter=asGetNext(order->products);
+    }
+
+    return price;
+}
+
+AmountSet orderGetProducts(Order order) {
+    return order->products;
 }

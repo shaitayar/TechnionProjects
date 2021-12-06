@@ -5,6 +5,9 @@
 #include <string.h>
 #include <math.h>
 #include "order.h"
+#include "set.h"
+#include "matamikya_print.h"
+
 #define AMOUNT_OFFSET 0.001
 
 struct Matamikya_t {
@@ -22,7 +25,17 @@ Matamikya matamikyaCreate() {
     }
 
     new_storage->products = asCreate(productCopy, productFree, productCompareByID);
+    if(!new_storage->products) {
+        matamikyaDestroy(new_storage);
+        return NULL;
+    }
+    new_storage->orders=asCreate(copyOrder,freeOrder,compareOrders);
+    if(!new_storage->orders) {
+        matamikyaDestroy(new_storage);
+        return NULL;
+    }
     new_storage->order_counter=0;
+    return new_storage;
 }
 
 void matamikyaDestroy(Matamikya matamikya) {
@@ -129,11 +142,11 @@ MatamikyaResult mtmClearProduct(Matamikya matamikya, const unsigned int id) {
 
 unsigned int mtmCreateNewOrder(Matamikya matamikya){
     if(!matamikya){
-        return NULL;
+        return 0;
     }
     Order new_order = createOrder(matamikya->order_counter);
     if (!new_order){
-        return NULL;
+        return 0;
     }
     return matamikya->order_counter++;
 }
@@ -179,7 +192,7 @@ MatamikyaResult mtmChangeProductAmountInOrder(Matamikya matamikya, const unsigne
     {
         return MATAMIKYA_ORDER_NOT_EXIST;
     }
-    if(result==MATAMIKYA_INSUFFICIENT_AMOUNT)
+    if(result==ORDER_INSUFFICIENT_AMOUNT)
     {
         return MATAMIKYA_INSUFFICIENT_AMOUNT;
     }
@@ -197,7 +210,7 @@ MatamikyaResult mtmShipOrder(Matamikya matamikya, const unsigned int orderId) {
     for(Product iterator=getFirstProductInOrder(order);iterator;iterator=getNextProductInOrder(order)) {
         Product warehouse_product=searchInProducts(matamikya,getProductID(iterator));
         double warehouse_product_amount;
-        asGetAmount(matamikya->products,searchInProducts(matamikya,getProductID(iterator)),&warehouse_product_amount);
+        asGetAmount(matamikya->products,warehouse_product,&warehouse_product_amount);
         if(getProductAmount(iterator)>warehouse_product_amount) {
             return MATAMIKYA_INSUFFICIENT_AMOUNT;
         }
@@ -217,17 +230,85 @@ MatamikyaResult mtmShipOrder(Matamikya matamikya, const unsigned int orderId) {
 }
 
 MatamikyaResult mtmCancelOrder(Matamikya matamikya, const unsigned int orderId) {
+    if(!matamikya) {
+        return MATAMIKYA_NULL_ARGUMENT;
+    }
 
+    AmountSetResult result=asDelete(matamikya->orders,searchInOrders(matamikya,orderId));
+    if(result==AS_NULL_ARGUMENT) {
+        return MATAMIKYA_NULL_ARGUMENT;
+    } else if(result==AS_ITEM_DOES_NOT_EXIST) {
+        return MATAMIKYA_ORDER_NOT_EXIST;
+    } else {
+        return MATAMIKYA_SUCCESS;
+    }
 }
 
 MatamikyaResult mtmPrintInventory(Matamikya matamikya, FILE *output) {
+    if(!matamikya||!output) {
+        return MATAMIKYA_NULL_ARGUMENT;
+    }
 
+    fprintf(output,"Inventory Status:\n");
+    Product iter=asGetFirst(matamikya->products);
+    while(iter) {
+        mtmPrintProductDetails(productGetName(iter),productGetID(iter),productGetAmount(iter),productGetPricePerUnit(iter),output);
+        iter=asGetNext(matamikya->products);
+    }
+
+    return MATAMIKYA_SUCCESS;
 }
 
 MatamikyaResult mtmPrintOrder(Matamikya matamikya, const unsigned int orderId, FILE *output) {
+    if(!matamikya||!output) {
+        return MATAMIKYA_NULL_ARGUMENT;
+    }
 
+    Order found=searchInOrders(matamikya,orderId);
+    if(!found) {
+        return MATAMIKYA_ORDER_NOT_EXIST;
+    }
+
+    mtmPrintOrderHeading(orderId,output);
+    
+    Product iter=asGetFirst(orderGetProducts(found));
+    while(iter) {
+        mtmPrintProductDetails(productGetName(iter),productGetID(iter),productGetAmount(iter),productGetPricePerUnit(iter),output);
+        iter=asGetNext(orderGetProducts(found));
+    }
+
+    mtmPrintOrderSummary(calcPrice(found), output);
+
+    return MATAMIKYA_SUCCESS;
 }
 
 MatamikyaResult mtmPrintBestSelling(Matamikya matamikya, FILE *output) {
+    if(!matamikya||!output) {
+        return MATAMIKYA_NULL_ARGUMENT;
+    }
 
+    fprintf(output,"Best Selling Product:\n");
+    
+    Product iter=asGetFirst(matamikya->products);
+    if(iter==NULL) {
+        fprintf(output, "none\n");
+        return MATAMIKYA_SUCCESS;
+    }
+    double max_incomes=productGetTotalIncomes(iter);
+    
+    while(iter) {
+        if(max_incomes < productGetTotalIncomes(iter)) {
+            max_incomes=productGetTotalIncomes(iter);
+        }
+        iter=asGetNext(matamikya->products);
+    }
+
+    iter=asGetFirst(matamikya->products);
+    while(iter) {
+        if(max_incomes==productGetTotalIncomes(iter)) {
+            mtmPrintIncomeLine(productGetName(iter),productGetID(iter),productGetTotalIncomes(iter),output);
+        }
+    }
+
+    return MATAMIKYA_SUCCESS;
 }

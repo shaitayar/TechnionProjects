@@ -1,7 +1,7 @@
 #ifndef MATAMIKYA_PRODUCT_H
 #define MATAMIKYA_PRODUCT_H
 
-
+#include "amount_set.h"
 
 typedef enum ProductAmountType_t {
     PRODUCT_INTEGER_AMOUNT,
@@ -23,16 +23,16 @@ typedef struct Product_t *Product;
 
 typedef void *ProductData;
 
-Product productCreate(char* name, unsigned int id, ProductData data, ProductAmountType amount_type,
+Product productCreate(const char* name, unsigned int id, ProductData data, ProductAmountType amount_type,
                       double amount, unsigned int total_incomes);
 
-Product productCopy(Product product);
+ASElement productCopy(ASElement product);
 
-void productFree(Product product);
+void productFree(ASElement product);
 
 int productCompareByName(Product product1, Product product2);
 
-int productCompareByID(Product product1, Product product2);
+int productCompareByID(ASElement product1, ASElement product2);
 
 unsigned int getProductID(Product product);
 
@@ -55,5 +55,14 @@ double productGetPrice (ProductData data, double Amount);
 /*Get Price- Discounts*/
 double basicGetPrice(ProductData basePrice, double amount);
 
+double productGetAmount(Product product);
+
+char* productGetName(Product product);
+
+unsigned int productGetID(Product product);
+
+double productGetPricePerUnit(Product product);
+
+double productGetTotalIncomes(Product product);
 
 #endif //MATAMIKYA_PRODUCT_H

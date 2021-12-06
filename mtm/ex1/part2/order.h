@@ -1,8 +1,9 @@
 #ifndef MATAMIKYA_ORDER_H
 #define MATAMIKYA_ORDER_H
 
-
+#include "set.h"
 #include "product.h"
+#include "amount_set.h"
 
 typedef enum OrderResult_t {
     ORDER_SUCCESS = 0,
@@ -20,11 +21,11 @@ typedef struct order_t *Order;
 
 Order createOrder(unsigned int id);
 
-Order copyOrder(Order source);
+ASElement copyOrder(ASElement source);
 
-void freeOrder(Order to_delete);
+void freeOrder(ASElement to_delete);
 
-int compareOrders(Order first, Order second);
+int compareOrders(ASElement first, ASElement second);
 
 OrderResult changeProductAmountInOrder(Order order, const unsigned int productId, const double amount);
 
@@ -34,5 +35,8 @@ Product getFirstProductInOrder(Order order);
 
 Product getNextProductInOrder(Order order);
 
+double calcPrice(Order order);
+
+AmountSet orderGetProducts(Order order);
 
 #endif //MATAMIKYA_ORDER_H
